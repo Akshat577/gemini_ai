@@ -16,10 +16,10 @@ def load_gemini_pro_model():
     gemini_pro_model=genai.GenerativeModel("gemini-pro")
     return gemini_pro_model
 
-def load_gemini_pro_vision_model(prompt,image):
-    gemini_pro_vision_model=genai.GenerativeModel("gemini-pro-vision")
-    response=gemini_pro_vision_model.generate_content([prompt,image])
-    result=response.text
+def load_gemini_1_5_flash_model(prompt, image):
+    gemini_1_5_flash_model = genai.GenerativeModel("gemini-1.5-flash")
+    response = gemini_1_5_flash_model.generate_content([prompt, image])
+    result = response.text
     return result
 
 def load_embedding_response(input_text):

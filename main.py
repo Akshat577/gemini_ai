@@ -3,7 +3,7 @@ import os
 import streamlit as st
 from streamlit_option_menu import option_menu
 from gemini_utility import load_gemini_pro_model
-from gemini_utility import load_gemini_pro_vision_model
+from gemini_utility import load_gemini_1_5_flash_model
 from gemini_utility import load_embedding_response
 from gemini_utility import gemini_pro_response
 from PIL import Image
@@ -46,22 +46,23 @@ if selected=="ChatBot":
             st.markdown(gemini_response.text)
 
 
-if selected=="Image Captioning":
+if selected == "Image Captioning":
     st.title("Image Captioning")
 
-    uploaded_image=st.file_uploader("Uplaod an Image..",type=["jpg,jpeg","png"])
+    uploaded_image = st.file_uploader("Upload an Image...", type=["jpg", "jpeg", "png"])
 
     if st.button("Generate caption"):
-        image =Image.open(uploaded_image)
-        col1,col2=st.columns(2)
+        image = Image.open(uploaded_image)
+        col1, col2 = st.columns(2)
 
         with col1:
-            resized_image=image.resize((800,500))
+            resized_image = image.resize((800, 500))
             st.image(resized_image)
 
-        default_prompt="write a short caption for this image"
+        default_prompt = "write a short caption for this image"
 
-        caption=load_gemini_pro_vision_model(default_prompt,image)
+        # Switch to the new model
+        caption = load_gemini_1_5_flash_model(default_prompt, image)
 
         with col2:
             st.info(caption)
